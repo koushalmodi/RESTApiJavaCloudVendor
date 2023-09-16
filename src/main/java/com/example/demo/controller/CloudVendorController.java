@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.CloudVendor;
+import com.example.demo.response.ResponseHandler;
 import com.example.demo.service.ClodVendorService;
 
 @RestController
@@ -38,16 +41,15 @@ public class CloudVendorController {
 	}
 	
 	@GetMapping("{id}")
-	public CloudVendor get(@PathVariable("id") String id)
-	{
-		return clodVendorService.get(id);
-		
+	public ResponseEntity<Object> get(@PathVariable("id") String id)
+	{	
+		return ResponseHandler.responseBuilder("Requested Vendor Details are",HttpStatus.OK, clodVendorService.get(id));
 	}
 	
 	@GetMapping
-	public List<CloudVendor> getAll(String id)
+	public ResponseEntity<Object> getAll(String id)
 	{
-		return clodVendorService.getAll();
+		return ResponseHandler.responseBuilder("Requested Vendor Details are",HttpStatus.OK, clodVendorService.getAll());
 		
 	}
 	

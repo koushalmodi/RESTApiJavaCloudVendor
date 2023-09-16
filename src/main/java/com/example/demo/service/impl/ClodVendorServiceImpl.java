@@ -43,6 +43,8 @@ public class ClodVendorServiceImpl implements ClodVendorService {
 	@Override
 	public String destroy(String id) {
 		// TODO Auto-generated method stub
+		if(cloudVendorRepository.findById(id).isEmpty())
+			throw new CloudVendorNotFoundException("Data not found");
 		cloudVendorRepository.deleteById(id);
 		return "Deleted";
 	}
@@ -50,6 +52,8 @@ public class ClodVendorServiceImpl implements ClodVendorService {
 	@Override
 	public List<CloudVendor> getAll() {
 		// TODO Auto-generated method stub
+		if(cloudVendorRepository.findAll().isEmpty())
+			throw new CloudVendorNotFoundException("Data not found");
 		return cloudVendorRepository.findAll();
 	}
 	
